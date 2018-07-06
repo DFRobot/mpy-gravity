@@ -102,58 +102,8 @@ class BME280_I2C(BME280):
     data = self.i2c.mem_read(2,self.addr,reg)
     return data[1]+data[0]*256
 
-class BME280_SPI(BME280):
-  def __init__(self,spi,cs):
-    self.spi = spi
-    self.cs = cs
-    super(BME280_SPI,self).__init__()
-
-  def setReg(self,reg,data):
-    regAddr = bytearray(1)
-    val = bytearray(1)
-    regAddr[0] = reg&0x7f
-    val[0] = data
-  #  self.cs.low()
-    self.spi.write(regAddr)
-    self.spi.write(val)
-    self.cs.high()
-    
-  def getReg(self,reg):
-    regAddr = bytearray(1)
-    regAddr[0] = reg|0x80
-  #  self.cs.low()
-    self.spi.write(regAddr)
-    rslt = self.spi.read(1+1)
-    self.cs.high()
-    #data = bytearray(1)
-    return rslt[1]
-    
-  def get2Reg(self,reg):
-    regAddr = bytearray(1)
-    regAddr[0] = reg|0x80
-  #  self.cs.low()
-    self.spi.write(regAddr)
-    rslt = self.spi.read(2+1)
-    self.cs.high()
-    #data = bytearray(2)
-    return rslt[1]+rslt[2]*256
-  
-  def get2RegS(self,reg):
-    regAddr = bytearray(1)
-    regAddr[0] = reg|0x80
-  #  self.cs.low()
-    self.spi.write(regAddr)
-    rslt = self.spi.read(2+1)
-    self.cs.high()
-    #data = bytearray(2)
-    return rslt[2]+rslt[1]*256
-
 i2c=pyb.I2C(1,pyb.I2C.MASTER,baudrate=100000) 
 bmp=BME280_I2C(i2c)
-#spi = pyb.SPI(1, pyb.SPI.MASTER, baudrate=500000, polarity=1, phase=0)
-#cs  = Pin("X3", Pin.OUT_OD)
-#bmp = BME280_SPI(spi,cs)
-#bmp.begin()
 
 while True:
   print("Temp : %s *C" %bmp.getTemp())
