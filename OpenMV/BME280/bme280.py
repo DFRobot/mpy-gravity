@@ -28,11 +28,10 @@ class BME280():
     self.H5 = (self.getReg(0xe5+1) << 4) | (self.getReg(0xe5) >> 4);
     self.H6 = self.getReg(0xe7)
 
-    self.setReg(0xF4, 0x2F)
-    self.setReg(0xF5, 0x0C)
     self.setReg(0xF2, 0x05)
-
-
+    self.setReg(0xF5, 0x0C)
+    self.setReg(0xF4, 0x2F)
+    
   def short(self, data):
     if data > 32767: return data-65536
     else: return data
@@ -72,8 +71,7 @@ class BME280():
   def getHumidity(self):
     adc_H = self.get2RegS(0xfd);
     if (adc_H == 0x8000):  # value in case humidity measurement was disabled
-      print('get failure')
-      self.setReg(0xF2, 0x05)
+      print('get humidity failure')
       return -2
     tmp = self.fine - 76800
     tmp = (((((adc_H << 14) - (self.H4 << 20) - self.H5 * tmp) + 16384) >> 15) * (((((((tmp * self.H6) >> 10)*(((tmp * self.H3) >> 11) + 32768)) >> 10) + 2097152) * self.H2 + 8192) >> 14))
