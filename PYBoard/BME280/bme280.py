@@ -1,10 +1,25 @@
-# BME280 can measure temperature, humidity and air pressure and can be 
+# BME280 can measure temperature, humidity and air pressure and can be
 # applied to environmental monitoring
+# connect I2C
+#   BME280    PYBoard
+#   VCC       VCC
+#   GND       GND
+#   SCL       SCL
+#   SDA       SDA
+#
+# connect SPI
+#   BME280    PYBoard
+#   VCC       VCC
+#   GND       GND
+#   MOSI      X8
+#   MISO      X7
+#   SCLK      X6
+#   CS        X1
+
 
 import time,math
-from pyb import Pin,I2C
+from pyb import Pin,I2C,SPI
 import pyb
-
 
 class BME280():
   def __init__(self):
@@ -20,14 +35,14 @@ class BME280():
     self.P7 = self.short(self.get2Reg(0x9A))
     self.P8 = self.short(self.get2Reg(0x9C))
     self.P9 = self.short(self.get2Reg(0x9E))
-    
+
     self.H1 = self.getReg(0xa1);
     self.H2 = self.short(self.get2Reg(0xe1))
     self.H3 = self.getReg(0xe3);
     self.H4 = (self.getReg(0xe4) << 4) | (self.getReg(0xe4+1) & 0xF);
     self.H5 = (self.getReg(0xe5+1) << 4) | (self.getReg(0xe5) >> 4);
     self.H6 = self.getReg(0xe7)
-    
+
     self.setReg(0xF2, 0x05)
     self.setReg(0xF5, 0x0C)
     self.setReg(0xF4, 0x2F)
@@ -35,7 +50,7 @@ class BME280():
   def short(self, data):
     if data > 32767: return data-65536
     else: return data
-    
+
   def getTemp(self):
     adc_T = (self.getReg(0xFA)<<12) + (self.getReg(0xFB)<<4) + (self.getReg(0xFC)>>4)
     var1 = (((adc_T>>3)-(self.T1<<1))*self.T2)>>11
@@ -43,7 +58,7 @@ class BME280():
     self.fine = var1+var2
     temp = ((self.fine * 5 + 128) >> 8)/100
     return temp
-  
+
   def getPress(self):
     var1 = (self.fine>>1) - 64000
     var2 = (((var1>>2) * (var1>>2)) >> 11 ) * self.P6
@@ -63,8 +78,8 @@ class BME280():
     var2 = (((p>>2)) * self.P8)>>13
     pres = p + ((var1 + var2 + self.P7) >> 4)
     return pres
-    
-    
+
+
   def getAltitude(self):
     return 44330*(1-(self.getPress()/101325)**(1/5.255))
 
@@ -80,35 +95,84 @@ class BME280():
     tmp = 419430400 if(tmp > 419430400) else tmp
     h = tmp>>12
     return  h / 1024
-    
+
 class BME280_I2C(BME280):
   def __init__(self,i2c):
     self.i2c = i2c
     self.addr = 0x77
     super(BME280_I2C,self).__init__()
-  
+
   def setReg(self,reg,data):
     self.i2c.mem_write(data,self.addr, reg)
-    
+
   def getReg(self,reg):
     data = self.i2c.mem_read(1,self.addr,reg)
     return data[0]
-    
+
   def get2Reg(self,reg):
     data = self.i2c.mem_read(2,self.addr,reg)
     return data[0]+data[1]*256
-  
+
   def get2RegS(self,reg):
     data = self.i2c.mem_read(2,self.addr,reg)
     return data[1]+data[0]*256
 
-i2c=pyb.I2C(1,pyb.I2C.MASTER,baudrate=100000) 
+class BME280_SPI(BME280):
+  def __init__(self,spi,cs):
+    self.spi = spi
+    self.cs = cs
+    super(BME280_SPI,self).__init__()
+
+  def begin(self):
+    print(self.getReg(0xd0))
+
+  def setReg(self,reg,data):
+    regAddr = bytearray(1)
+    val = bytearray(1)
+    regAddr[0] = reg&0x7f
+    val[0] = data
+    self.cs.low()
+    self.spi.write(regAddr)
+    self.spi.write(val)
+    self.cs.high()
+
+  def getReg(self,reg):
+    regAddr = bytearray(1)
+    regAddr[0] = reg|0x80
+    self.cs.low()
+    self.spi.write(regAddr)
+    rslt = self.spi.read(1+1)
+    self.cs.high()
+    return rslt[0]
+
+  def get2Reg(self,reg):
+    regAddr = bytearray(1)
+    regAddr[0] = reg|0x80
+    self.cs.low()
+    self.spi.write(regAddr)
+    rslt = self.spi.read(2+1)
+    self.cs.high()
+    return rslt[0]+rslt[1]*256
+
+  def get2RegS(self,reg):
+    regAddr = bytearray(1)
+    regAddr[0] = reg|0x80
+    self.cs.low()
+    self.spi.write(regAddr)
+    rslt = self.spi.read(2+1)
+    self.cs.high()
+    return rslt[1]+rslt[0]*256
+
+i2c=pyb.I2C(1,pyb.I2C.MASTER,baudrate=100000)
 bmp=BME280_I2C(i2c)
+#spi = pyb.SPI(1, pyb.SPI.MASTER, baudrate=100000, polarity=0, phase=0)
+#cs  = Pin("X1", Pin.OUT_OD)
+#bmp = BME280_SPI(spi,cs)
 
 while True:
   print("Temp : %s *C" %bmp.getTemp())
   print("Pres : %s Pa" %bmp.getPress())
   print("Alti : %s m"  %bmp.getAltitude())
   print("Humi : %s  "  %bmp.getHumidity())
-  print()
+  print("")
   time.sleep(1)
