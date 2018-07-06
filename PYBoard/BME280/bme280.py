@@ -1,22 +1,3 @@
-# BME280 can measure temperature, humidity and air pressure and can be
-# applied to environmental monitoring
-# connect I2C
-#   BME280    PYBoard
-#   VCC       VCC
-#   GND       GND
-#   SCL       SCL
-#   SDA       SDA
-#
-# connect SPI
-#   BME280    PYBoard
-#   VCC       VCC
-#   GND       GND
-#   MOSI      X8
-#   MISO      X7
-#   SCLK      X6
-#   CS        X1
-
-
 import time,math
 from pyb import Pin,I2C,SPI
 import pyb
