@@ -3,6 +3,14 @@
 # plugged in: pins X1 through X4 are the signal pins, and next to 
 # them are 4 sets of power and ground pins.
 # the angle of servo is in range(-90,90)
+# external power: 5V
+# connect:
+#     Sensor    pyb
+#     VCC       5V
+#     GND       GND
+#     data1     X1
+#     data2     X2
+
 
 import pyb
 import time

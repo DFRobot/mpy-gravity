@@ -1,6 +1,10 @@
 # ds18b20 is used to measure temperature. 
 # You should to download ds18b20.py before using ds18b20Demo.py
-
+# connect:
+#     Sensor    pyb
+#     VCC       3V3
+#     GND       GND
+#     data      X1
 
 from pyb import Pin
 import onewire

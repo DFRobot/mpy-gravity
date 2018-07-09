@@ -1,6 +1,12 @@
 # Servo Control Example
 #
 # This example shows how to use your OpenMV Cam to control servos.
+# connect:
+#     Sensor    OpenMV
+#     VCC       5V
+#     GND       GND
+#     data1     P7
+#     data2     P8
 
 import time
 from pyb import Servo,Pin

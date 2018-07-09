@@ -1,7 +1,7 @@
 # ADXL345 is suitable for tilt Angle measurement 
 # and can be used for static gravity acceleration detection
 # connect:
-#     ADXL345   pyb
+#     ADXL345   OpenMV
 #     VCC       5V/3V3
 #     GND       GND
 #     CS        5V/3V3
@@ -12,12 +12,11 @@
 from pyb import Pin,I2C
 import math
 import time
-DEVICE = 0x53
-TO_READ = 6
+DEVICE = 0x53           # ADXL345 device address
+TO_READ = 6             # Num of bytes we are going to read each time (two bytes for each axis)
 
-buff = bytearray(6)
-str = bytearray(512)
-regAddress = 0x32
+buff = bytearray(6)     # 6 bytes buffer for saving data read from the device
+regAddress = 0x32       # First axis-acceleration-data register on the ADXL345
 x = 0
 y = 0
 z = 0
@@ -41,7 +40,9 @@ i2c.mem_write(16,DEVICE, 0x2D)
 i2c.mem_write(8, DEVICE, 0x2D)
 
 while True:
-  buff = i2c.mem_read(TO_READ, DEVICE, regAddress)
+  buff = i2c.mem_read(TO_READ, DEVICE, regAddress)    # Read the acceleration data from the ADXL345
+  # Each axis reading comes in 10 bit resolution, ie 2 bytes.
+  # thus we are converting both bytes in to one int
   if(buff[1] == 0xfe):
     x = buff[0] - 512
   elif(buff[1] == 0xff):
