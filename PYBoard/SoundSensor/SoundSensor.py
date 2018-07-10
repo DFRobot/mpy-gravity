@@ -1,9 +1,10 @@
 # Detection sound intensity
+# Hardware : SoundSensor, PYBoard 
 # connect:
-#     Sensor    pyb
-#     VCC       3V3
-#     GND       GND
-#     data      X1
+#     SoundSensor   pyb
+#     VCC           3V3
+#     GND           GND
+#     data          X1
 
 from pyb import ADC,Pin
 import time

@@ -1,9 +1,10 @@
 # Detection sound intensity
+# Hardware : SoundSensor, OpenMV
 # connect:
-#     Sensor    OpenMV
-#     VCC       3V3
-#     GND       GND
-#     data      P6
+#     SoundSensor     OpenMV
+#     VCC             3V3
+#     GND             GND
+#     data            P6
 
 from pyb import ADC,Pin
 import time

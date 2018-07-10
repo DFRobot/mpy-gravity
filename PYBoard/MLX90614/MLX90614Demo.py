@@ -1,10 +1,11 @@
 # This example is to get the ambient temperature and object temperature by the I2C bus
+# Hardware : MLX90614, PYBoard 
 # connect I2C
-#   BME280    PYBoard
-#   VCC       VCC
-#   GND       GND
-#   SCL       SCL
-#   SDA       SDA
+#   MLX90614    PYBoard
+#   VCC         VCC
+#   GND         GND
+#   SCL         SCL
+#   SDA         SDA
 
 from pyb import I2C
 import time

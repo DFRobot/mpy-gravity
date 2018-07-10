@@ -1,9 +1,10 @@
 # Calculate the light intensity by reading the adc
+# Hardware : AmbientLight, OpenMV
 # connect:
-#     Sensor    OpenMV
-#     VCC       3V3
-#     GND       GND
-#     data      P6
+#     AmbientLight    OpenMV
+#     VCC             3V3
+#     GND             GND
+#     data            P6
 
 from pyb import ADC,Pin
 import time

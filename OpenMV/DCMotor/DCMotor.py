@@ -1,6 +1,7 @@
 # Control dc motor
+# Hardware : DCmotor, OpenMV
 # connect:
-#     Sensor    OpenMV
+#     DCmotor    OpenMV
 #     VCC       3V3
 #     GND       GND
 #     data      P7

@@ -1,7 +1,8 @@
 # ADXL345 is suitable for tilt Angle measurement 
 # and can be used for static gravity acceleration detection
+# Hardware : ADXL345, PYBoard
 # connect:
-#     ADXL345   pyb
+#     ADXL345   PYBoard
 #     VCC       5V/3V3
 #     GND       GND
 #     CS        5V/3V3

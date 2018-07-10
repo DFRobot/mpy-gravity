@@ -1,8 +1,8 @@
 # Servo Control Example
-#
 # This example shows how to use your OpenMV Cam to control servos.
+# Hardware : Servo, OpenMV
 # connect:
-#     Sensor    OpenMV
+#     Servo    OpenMV
 #     VCC       5V
 #     GND       GND
 #     data1     P7

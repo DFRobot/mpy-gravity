@@ -1,6 +1,7 @@
 # Read the amplitude in the X and Y of the Joystick and the value in the Z direction
 # OpenMV has only one pin to read ADC, so only one of the values of X or Y can be read
-#     Sensor          OpenMV
+# Hardware : Joystick, OpenMV
+#     Joystick        OpenMV
 #     VCC             3V3
 #     GND             GND
 #     x_data/y_data   P6

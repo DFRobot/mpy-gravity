@@ -1,6 +1,7 @@
-# lm35 is used to measure temperature. 
+# lm35 is used to measure temperature.
+# Hardware : lm35, PYBoard 
 # connect:
-#     Sensor    pyb
+#     lm35      PYBoard
 #     VCC       3V3
 #     GND       GND
 #     data      X1

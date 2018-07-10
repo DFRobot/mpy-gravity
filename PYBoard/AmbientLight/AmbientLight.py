@@ -1,9 +1,10 @@
 # Calculate the light intensity by reading the adc
+# Hardware : AmbientLight, PYBoard
 # connect:
-#     Sensor    pyb
-#     VCC       3V3
-#     GND       GND
-#     data      X1
+#     AmbientLight    PYBoard
+#     VCC             3V3
+#     GND             GND
+#     data            X1
 
 
 from pyb import ADC,Pin

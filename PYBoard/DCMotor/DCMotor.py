@@ -1,6 +1,7 @@
 # Control dc motor
+# Hardware : DCMotor, PYBoard
 # connect:
-#     Sensor    pyb
+#     DCMotor   PYBoard
 #     VCC       3V3
 #     GND       GND
 #     data      X1

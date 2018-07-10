@@ -1,7 +1,8 @@
 # ds18b20 is used to measure temperature. 
 # You should to download ds18b20.py before using ds18b20Demo.py
+# Hardware : ds18b20, PYBoard
 # connect:
-#     Sensor    pyb
+#     ds18b20   PYBoard
 #     VCC       3V3
 #     GND       GND
 #     data      X1

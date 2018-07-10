@@ -1,9 +1,10 @@
 # Detect infrared (IR) of people/ animals in motion
+# Hardware : PIRMotionSensor, PYBoard 
 # connect:
-#     Sensor    pyb
-#     VCC       3V3
-#     GND       GND
-#     data      X1
+#     PIRMotionSensor   PYBoard
+#     VCC               3V3
+#     GND               GND
+#     data              X1
 
 from pyb import Pin,LED
 import time

@@ -1,11 +1,12 @@
 # Read the amplitude in the X and Y of the Joystick and the value in the Z direction
+# Hardware : Joystick, PYBoard
 # connect:
-#     Sensor    pyb
-#     VCC       3V3
-#     GND       GND
-#     x_data    X1
-#     y_data    X2
-#     z_data    X3
+#     Joystick    PYBoard
+#     VCC         3V3
+#     GND         GND
+#     x_data      X1
+#     y_data      X2
+#     z_data      X3
 
 from pyb import ADC,Pin
 import time

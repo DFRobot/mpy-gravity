@@ -1,6 +1,7 @@
 # lm35 is used to measure temperature.
+# Hardware : lm35, OpenMV
 # connect:
-#     Sensor    OpenMV
+#     lm35      OpenMV
 #     VCC       3V3
 #     GND       GND
 #     data      P6

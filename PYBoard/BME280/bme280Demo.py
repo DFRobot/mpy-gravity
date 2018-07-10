@@ -1,6 +1,7 @@
 # BME280 can measure temperature, humidity and air pressure and can be
 # applied to environmental monitoring
 # BME280 supports the SPI/I2C communication.
+# Hardware : BME280, PYBoard
 # connect I2C
 #   BME280    PYBoard
 #   VCC       VCC

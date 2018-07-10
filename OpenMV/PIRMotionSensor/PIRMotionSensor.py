@@ -1,9 +1,10 @@
 # Detect infrared (IR) of people/ animals in motion
+# Hardware : PIRMotionSensor, OpenMV
 # connect:
-#     Sensor    OpenMV
-#     VCC       3V3
-#     GND       GND
-#     data      P0
+#     PIRMotionSensor   OpenMV
+#     VCC               3V3
+#     GND               GND
+#     data              P0
 
 from pyb import Pin,LED
 import time

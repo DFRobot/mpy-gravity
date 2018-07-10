@@ -1,6 +1,7 @@
 # This example is to get the ambient temperature and object temperature by the I2C bus
+# Hardware : MLX90614, OpenMV
 # connect I2C
-#   BME280    OpenMV
+#   MLX90614  OpenMV
 #   VCC       VCC
 #   GND       GND
 #   SCL       SCL

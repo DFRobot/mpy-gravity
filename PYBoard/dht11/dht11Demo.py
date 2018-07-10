@@ -1,7 +1,8 @@
 # DHT11 is used to measure temperature and humidity. 
 # You should to download dht11.py before using dht11Demo.py
+# Hardware : DHT11, PYBoard
 # connect:
-#     Sensor    pyb
+#     DHT11     PYBoard
 #     VCC       3V3
 #     GND       GND
 #     data      X1
