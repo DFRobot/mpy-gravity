@@ -6,7 +6,7 @@
 # external power: 5V
 # Hardware : Servo, PYBoard 
 # connect:
-#     Servo     pyb
+#     Servo     PYBoard
 #     VCC       5V
 #     GND       GND
 #     data1     X1

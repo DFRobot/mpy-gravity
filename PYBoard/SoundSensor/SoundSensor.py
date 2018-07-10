@@ -1,7 +1,7 @@
 # Detection sound intensity
 # Hardware : SoundSensor, PYBoard 
 # connect:
-#     SoundSensor   pyb
+#     SoundSensor   PYBoard
 #     VCC           3V3
 #     GND           GND
 #     data          X1
