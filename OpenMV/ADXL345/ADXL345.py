@@ -1,5 +1,6 @@
 # ADXL345 is suitable for tilt Angle measurement 
 # and can be used for static gravity acceleration detection
+# Hardware : ADXL345, OpenMV
 # connect:
 #     ADXL345   OpenMV
 #     VCC       5V/3V3

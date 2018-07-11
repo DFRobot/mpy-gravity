@@ -40,7 +40,7 @@ class dht11:
         if (loopCnt == 0):
           return -1,-1
 
-      t = time.ticks_us()#############
+      t = time.ticks_us()
 
       loopCnt = 10000
       while(pin.value() == 1):

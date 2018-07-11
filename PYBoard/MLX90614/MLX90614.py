@@ -30,13 +30,4 @@ class MLX90614:
     result = (data[1]<<8) | data[0]
     return result
 
-i2c=I2C(1,I2C.MASTER,baudrate=100000) 
-ir=MLX90614(i2c)
-while True:
-  time.sleep(1)
-  print("Object  %s *C"% ir.getObjCelsius())        #print celsius of Object
-  print("Object  %s *F"% ir.getObjFahrenheit())     #print fahrenheit of Object
-  print("Ambient %s *C"% ir.getEnvCelsius())        #print celsius of Ambient
-  print("Ambient %s *F"% ir.getEnvFahrenheit())     #print fahrenheit of Ambient
-  print()
 
